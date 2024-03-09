@@ -13,7 +13,7 @@ Monet Text Editor is a web-based text editor created for fun, utilizing HTML, CS
 Simply clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/1wtsd/MonetTextEditor/.git
+git clone https://github.com/1wtsd/MonetTextEditor.git
 ```
 
 ### Contributing
