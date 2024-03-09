@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monet Text Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="menu-bar">
+        <div class="menu-item-left"></div>
+        <div class="menu-item" onclick="toggleMenu()">File</div>
+        <ul class="dropdown-menu" id="dropdownMenu">
+            <li onclick="openFile()">Open</li>
+            <li onclick="saveFile()">Save</li>
+            <hr/>
+            <li onclick="exitEditor()">Exit</li>
+        </ul>
+        <div class="menu-item" onclick="showAbout()">About</div>
+    </div>
+    <div class="editor">
+        <textarea id="textarea" rows="1" cols="50" placeholder="Start typing..."></textarea>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
