@@ -6,9 +6,11 @@
     <title>Monet Text Editor</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bodyS">
     <div class="menu-bar">
         <div class="menu-item-left"></div>
+        <div class="menu-item-" id="title">Monet</div>
+
         <div class="menu-item" onclick="toggleMenu()">File</div>
         <ul class="dropdown-menu" id="dropdownMenu">
             <li onclick="openFile()">Open</li>
@@ -16,6 +18,11 @@
             <hr/>
             <li onclick="exitEditor()">Exit</li>
         </ul>
+        <ul class="dropdown-menu" id="dropdownMenuEdit">
+            <li onclick="paste()">Paste</li>
+            <li onclick="selectAll()">Select All</li>
+        </ul>
+        <div class="menu-item" onclick="toggleMenuEdit()">Edit</div>
         <div class="menu-item" onclick="showAbout()">About</div>
     </div>
     <div class="editor">
