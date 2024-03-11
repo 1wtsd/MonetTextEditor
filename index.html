@@ -23,7 +23,12 @@
             <li onclick="selectAll()">Select All</li>
         </ul>
         <div class="menu-item" onclick="toggleMenuEdit()">Edit</div>
-        <div class="menu-item" onclick="showAbout()">About</div>
+        <ul class="dropdown-menu" id="dropdownMenuHelp">
+            <li onclick="window.open('https://github.com/1wtsd/MonetTextEditor')">Update</li>
+            <hr/>
+            <li onclick="showAbout()">About</li>
+        </ul>
+        <div class="menu-item" onclick="toggleMenuHelp()">Help</div>
     </div>
     <div class="editor">
         <textarea id="textarea" rows="1" cols="50" placeholder="Start typing..."></textarea>

@@ -1,6 +1,6 @@
 var openedFileName = null;
 
-var MTXVersion = '1.1';
+var MTXVersion = '1.2';
 
 function adjustTextareaHeight() {
     var textarea = document.getElementById('textarea');
@@ -33,46 +33,55 @@ function toggleMenuEdit() {
 
 function openFile() {
     var input = document.createElement('input');
-    var title = document.getElementById("title");
     input.type = 'file';
 
     input.onchange = function(event) {
         var file = event.target.files[0];
-        var reader = new FileReader();
+        if (!file) return;
 
+        var reader = new FileReader();
         reader.onload = function() {
-            var text = reader.result;
-            document.getElementById('textarea').value = text;
+            document.getElementById('textarea').value = reader.result;
             adjustTextareaHeight();
-            title.textContent = file.name;
+            document.getElementById("title").textContent = file.name;
             openedFileName = file.name;
         };
 
         reader.readAsText(file);
     };
+
     input.click();
 }
 
+
 function saveFile() {
-    var textarea = document.getElementById('textarea');
-    var text = textarea.value;
+    var text = document.getElementById('textarea').value;
     var fileName = openedFileName || 'document.txt';
     var blob = new Blob([text], { type: 'text/plain' });
     var a = document.createElement('a');
-    a.href = window.URL.createObjectURL(blob);
+    a.href = URL.createObjectURL(blob);
     a.download = fileName;
     a.click();
 }
 
 function paste() {
     var textarea = document.getElementById('textarea');
-    navigator.clipboard.readText()
-        .then((clipboardText) => {
-            textarea.value += clipboardText;
-        })
-        .catch((error) => {
-            console.error('MTError 20 - Failed to read clipboard contents: ', error);
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.readText()
+            .then((clipboardText) => {
+                textarea.value += clipboardText;
+            })
+            .catch((error) => {
+                console.error('MTError 20 - Failed to read clipboard contents: ', error);
+            });
+    } else {
+        textarea.focus();
+        document.execCommand('paste');
+        textarea.addEventListener('input', function() {
+            textarea.removeEventListener('input', arguments.callee);
         });
+    }
 }
 
 function selectAll() {
@@ -102,8 +111,17 @@ function exitEditor() {
     }
 }
 
+function toggleMenuHelp() {
+    var menu = document.getElementById("dropdownMenuHelp");
+    if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+    } else {
+        menu.style.display = "none";
+    }
+}
+
 function showAbout() {
-    alert('Monet Text Editor\n\nVersion ' + MTXVersion + '\nCreated by iwtsyd\nGitHub: https://github.com/1wtsd/MonetTextEditor');
+    alert('Monet Text Editor\n\nVersion: ' + MTXVersion + '\nAuthor: iwysyd\nGitHub: https://github.com/1wtsd/MonetTextEditor')
 }
 
 function toggleTheme() {
